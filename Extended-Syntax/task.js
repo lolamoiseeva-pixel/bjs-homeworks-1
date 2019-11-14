@@ -1,41 +1,48 @@
 "use strict";
 
-console.log("Task 1");
+function calculateQuadraticEquation(){
+    let a = +window.a.value;
+    let b = +window.b.value;
+    let c = +window.c.value;
+    let result = getResult(a,b,c);
+    window.equation.textContent = `${a}*x^2 + (${b})*x + (${c}) = 0`;
+    let span = window.result;
+    span.textContent = "х = "+result;
+}
 
-function getResult(a, b, c) {
-  
-  let D = Math.pow(b,2) - 4 * a * c;
-  let arr = [];
+function getResult(a,b,c){
+    let D = Math.pow(b,2) - 4 * a * c;
+    let x = [];
   
   if (D < 0) {
-    return arr;
+    return x;
   }
    
   else if (D === 0) {
 
-    arr.push(-b / 2* a);
-    return arr;
+    x.push(-b / 2* a);
+    return x;
 
-} else {
+  } else {
 
-  arr.push((-b+Math.sqrt(D))/2*a);
-  arr.push((-b-Math.sqrt(D))/2*a);
+    x.push((-b+Math.sqrt(D))/2*a);
+    x.push((-b-Math.sqrt(D))/2*a);
     
-    return arr;
+    return x;
   }
 }
- getResult(2, 4, -3);
 
+function calculateAverageRating(){
+    let marks = window.marks.value.split("").map(Number).filter((n)=> !isNaN(n) && n > 0);
+    let averageMark = getAverageMark(marks);
+    window.averageMark.textContent = averageMark;
+}
 
-
- console.log("Task 2");
-
- function getAverageMark(marks) {
-        
-        if (marks.length > 5) {
+function getAverageMark(marks){
+    if (marks.length > 5) {
             console.log("Необходимо уменьшить кол-во оценок до 5");
             marks.splice(5, marks.length - 5);
-        }
+    }
 
     let sum = 0;
 
@@ -45,26 +52,28 @@ function getResult(a, b, c) {
         }
       
         let averageMark = sum / marks.length;
-        console.log(averageMark);
-    }
+    return getAverageMark;
+    
+}
 
+function calculateDrinkTask(){
+    let name = window.personName.value;
+    let dateOfBirthday = new Date(window.dateOfBirthday.value);
+    let drink = askDrink(name, dateOfBirthday);
+    window.drink.textContent = drink;
+}
 
-
-    let marksList = prompt("Введите оценки через запятую");
-    let marks = JSON.parse("[" + marksList + "]");
-   
-
-    getAverageMark(marks);
-
-console.log("Task 3");
-
-function askDrink(name, dateOfBirth) {
-
+function askDrink(name,dateOfBirthday){
+    // код для задачи №3 писать здесь
+    //console.log(result)
+    //return result;
     let date1 = new Date();
     
     let date2 = new Date(dateOfBirth);
 
     let age = date1.getFullYear()  - date2.getFullYear();
+
+    let result;
 
 
     if ((date1.getMonth()  - date2.getMonth()) < 0 || (date1.getMonth - date2.getMonth()) === 0
@@ -73,17 +82,20 @@ function askDrink(name, dateOfBirth) {
     }
     
     if (age > 18){
-        console.log("Не желаете ли олд-фэшн," + name +"?");
+
+        result = "Не желаете ли олд-фэшн," + name +"?"
+        
     
     } else {
 
-        console.log("Сожалею," + name + ", но я не могу вам продать алкоголь. Зато могу предложить вам замечательный клюквенный компот!");
+        result = "Сожалею," + name + ", но я не могу вам продать алкоголь. Зато могу предложить вам замечательный клюквенный компот!"
+
     }
+    console.log(result);
+    return result;
 
 }
 
-let name = prompt("Введите Ваше имя");
-let dateOfBirth = prompt("Ваша дата рождения в формате ММ-ДД-ГГГ?");
 
 
-askDrink(name, dateOfBirth);
+    
